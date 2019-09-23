@@ -4,13 +4,11 @@ import {
 } from 'react-native';
 
 
-const App = () => {
-  return (
-    <View style={styles.screen}>
-      <Text>Hi</Text>
-    </View>
-  );
-};
+const App: React.FC = () => (
+  <View style={styles.screen}>
+    <Text>Hi</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   screen: {

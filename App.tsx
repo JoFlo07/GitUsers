@@ -1,21 +1,10 @@
 import React from 'react';
-import {
-  Text, View, StyleSheet,
-} from 'react-native';
+import MainNavigator from './navigation/MainNavigator';
 
 
 const App: React.FC = () => (
-  <View style={styles.screen}>
-    <Text>Hi</Text>
-  </View>
+  <MainNavigator />
 );
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem, Avatar } from 'react-native-elements';
 import {
-  View, Text, StyleSheet, Image, FlatList,
+  View, Text, StyleSheet, FlatList,
 } from 'react-native';
 import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
 import COLORS from '../constants/Colors';
@@ -13,13 +13,12 @@ interface UserDetailsScreenProps {
 }
 
 const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => {
-  const [spinner, setSpinner] = useState(false);
+  const [spinner, setSpinner] = useState(true);
   const username = navigation.getParam('name');
   const avatar = navigation.getParam('avatar');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setSpinner(true);
     dispatch(getUserFollowers(username));
     dispatch(getUserRepos(username));
   }, []);
@@ -75,14 +74,14 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         keyExtractor={(item, index) => index.toString()}
         data={fetchedFollowers}
         renderItem={renderFollowers}
-        style={{ width: '100%' }}
+        style={{ width: '100%', height: 200 }}
       />
       <Text style={styles.title}>REPOSITORIES</Text>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={fetchedRepos}
         renderItem={renderRepos}
-        style={{ width: '100%' }}
+        style={{ width: '100%', height: 200 }}
       />
     </View>
   );
@@ -108,11 +107,15 @@ const styles = StyleSheet.create({
     color: COLORS.primaryColor,
     marginVertical: 20,
     fontWeight: '600',
+    fontSize: 20,
   },
   username: {
     fontWeight: '600',
     paddingLeft: 20,
-    fontSize: 24,
+    fontSize: 20,
+  },
+  repoContainer: {
+    marginTop: 40,
   },
 });
 

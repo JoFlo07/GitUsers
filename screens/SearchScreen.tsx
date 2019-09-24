@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem } from 'react-native-elements';
 import {
-  View, StyleSheet, Keyboard, Text, Image, TouchableOpacity,
+  View, StyleSheet, Keyboard, TouchableOpacity,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import SearchResultList from '../components/SearchResultList';
-import Card from '../components/Card';
 import { getUsers } from '../redux/ApiServices';
 
 import COLORS from '../constants/Colors';
@@ -33,9 +32,9 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
     dispatch(getUsers(userInput));
   };
 
+
   // get users from store
   const fetchedUsers = useSelector((state) => state.users.users);
-
 
   const renderUsers = ({ item }) => {
     setSpinner(false);
@@ -92,6 +91,10 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: '600',
     color: COLORS.primaryColor,
+  },
+  startContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 

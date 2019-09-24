@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import {
-  View, StyleSheet, FlatList,
+  View, StyleSheet, FlatList, Text, Alert,
 } from 'react-native';
 
 
@@ -31,7 +31,9 @@ interface SearchResultListProps {
   fetchedUsers: IUser[],
 }
 
-const SearchResultList: React.FC<SearchResultListProps> = ({ fetchedUsers, renderUsers }) => {
+const SearchResultList: React.FC<SearchResultListProps> = ({
+  fetchedUsers, renderUsers,
+}) => {
   return (
     <View style={styles.listContainer}>
       <FlatList

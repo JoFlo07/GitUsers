@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR,
 } from './actions';
@@ -9,7 +8,7 @@ const initialState = {
   error: null,
 };
 
-export function usersReducer(
+export default function usersReducer(
   state = initialState, action: { type: any; payload: any; error: any; },
 ) {
   switch (action.type) {

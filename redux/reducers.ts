@@ -83,7 +83,7 @@ export function reposReducer(
       return {
         ...state,
         pending: false,
-        followers: action.payload,
+        repos: action.payload,
       };
     case FETCH_REPOS_ERROR:
       return {

@@ -31,6 +31,7 @@ export const getUsers = (userName) => (dispatch) => {
 
 
 export const getUserFollowers = (userName) => (dispatch) => {
+  console.log(userName);
   dispatch(fetchFollowersPending());
   fetch(`${BASE_URL}users/${userName}/followers`)
     .then((res) => res.json())
@@ -38,8 +39,8 @@ export const getUserFollowers = (userName) => (dispatch) => {
       if (res.error) {
         throw (res.error);
       }
-      dispatch(fetchFollowersSuccess(res.items));
-      return res.items;
+      dispatch(fetchFollowersSuccess(res));
+      return res;
     })
     .catch((error) => {
       dispatch(fetchFollowersError(error));
@@ -54,8 +55,8 @@ export const getUserRepos = (userName) => (dispatch) => {
       if (res.error) {
         throw (res.error);
       }
-      dispatch(fetchReposSuccess(res.items));
-      return res.items;
+      dispatch(fetchReposSuccess(res));
+      return res;
     })
     .catch((error) => {
       dispatch(fetchReposError(error));

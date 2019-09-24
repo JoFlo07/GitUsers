@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {
-  View, StyleSheet, Keyboard, Text, FlatList, Image, TouchableOpacity,
+  View, StyleSheet, Keyboard, Text, Image, TouchableOpacity,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
+import SearchResultList from '../components/SearchResultList';
+import Card from '../components/Card';
 import { getUsers } from '../redux/ApiServices';
 
 import COLORS from '../constants/Colors';
@@ -46,7 +48,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
       <TouchableOpacity
         onPress={handleClickHandler}
       >
-        <View style={styles.card}>
+        <Card>
           <Image
             source={{ uri: itemData.item.avatar_url }}
             style={{ height: '100%', width: '50%' }}
@@ -54,7 +56,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
           <View>
             <Text style={styles.name}>{itemData.item.login.toUpperCase()}</Text>
           </View>
-        </View>
+        </Card>
       </TouchableOpacity>
     );
   };
@@ -71,11 +73,9 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
         userInput={userInput}
         userInputHandler={userInputHandler}
       />
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        data={fetchedUsers}
-        renderItem={renderUsers}
-        style={{ width: '100%' }}
+      <SearchResultList
+        renderUsers={renderUsers}
+        fetchedUsers={fetchedUsers}
       />
     </View>
   );
@@ -90,19 +90,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: '100%',
     backgroundColor: COLORS.accentColor,
-  },
-  card: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    elevation: 5,
-    backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: COLORS.accentColor,
-    padding: 20,
-    marginVertical: 10,
-    height: 150,
-    width: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF',

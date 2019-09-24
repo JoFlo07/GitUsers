@@ -5,6 +5,8 @@ import {
   View, Text, StyleSheet, Image, FlatList,
 } from 'react-native';
 import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
+import List from '../components/List';
+import COLORS from '../constants/Colors';
 
 interface UserDetailsScreenProps {
   navigation: any,
@@ -28,9 +30,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
 
   const renderFollowers = (itemData) => {
     return (
-      <View>
-        <Text>{itemData.item.login}</Text>
-      </View>
+      <Text>{itemData.item.login}</Text>
     );
   };
 
@@ -57,18 +57,22 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         />
         <Text>{username}</Text>
       </View>
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        data={fetchedFollowers}
-        renderItem={renderFollowers}
-        style={{ width: '100%' }}
-      />
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        data={fetchedRepos}
-        renderItem={renderRepos}
-        style={{ width: '100%' }}
-      />
+      <List style={styles.listContainer}>
+        <Text>FOLLOWERS</Text>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={fetchedFollowers}
+          renderItem={renderFollowers}
+          style={{ width: '100%' }}
+        />
+        <Text>REPOSITORIES</Text>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={fetchedRepos}
+          renderItem={renderRepos}
+          style={{ width: '100%' }}
+        />
+      </List>
     </View>
   );
 };
@@ -81,13 +85,17 @@ const styles = StyleSheet.create({
   },
   userDetailsContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    backgroundColor: COLORS.accentColor,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingVertical: 10,
-    width: '80%',
+    width: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF',
+  },
+  listContainer: {
+
   },
 });
 

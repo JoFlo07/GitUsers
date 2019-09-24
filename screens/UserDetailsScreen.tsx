@@ -8,11 +8,13 @@ const UserDetailsScreen: React.FC = ({ navigation }) => {
   const avatar = navigation.getParam('avatar');
   return (
     <View style={styles.screen}>
-      <Image
-        source={{ uri: avatar }}
-        style={{ height: 50, width: 50 }}
-      />
-      <Text>{username}</Text>
+      <View style={styles.userDetailsContainer}>
+        <Image
+          source={{ uri: avatar }}
+          style={{ height: 50, width: 50 }}
+        />
+        <Text>{username}</Text>
+      </View>
     </View>
   );
 };
@@ -20,8 +22,15 @@ const UserDetailsScreen: React.FC = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  userDetailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 10,
+    width: '80%',
   },
 });
 

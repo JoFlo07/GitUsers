@@ -4,7 +4,7 @@ import {
   View, StyleSheet, Keyboard, Text, FlatList, Image, TouchableOpacity,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import getUsers from '../redux/ApiServices';
+import { getUsers } from '../redux/ApiServices';
 
 import COLORS from '../constants/Colors';
 

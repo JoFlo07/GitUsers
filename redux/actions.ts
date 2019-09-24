@@ -11,7 +11,7 @@ export function fetchUsersPending() {
 export function fetchUsersSuccess(users) {
   return {
     type: FETCH_USERS_SUCCESS,
-    users,
+    payload: users,
   };
 }
 

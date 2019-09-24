@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export default function usersReducer(
-  state = initialState, action: { type: any; payload: any; error: any; },
+  state = initialState, action: { type: string; payload: any; error: 'string'; },
 ) {
   switch (action.type) {
     case FETCH_USERS_PENDING:

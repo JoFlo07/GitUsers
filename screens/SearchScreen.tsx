@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { ListItem } from 'react-native-elements';
 import {
   View, StyleSheet, Keyboard, Text, Image, TouchableOpacity,
 } from 'react-native';
@@ -36,27 +37,33 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
   const fetchedUsers = useSelector((state) => state.users.users);
 
 
-  const renderUsers = (itemData) => {
+  const renderUsers = ({ item }) => {
     setSpinner(false);
     const handleClickHandler = () => {
       navigation.navigate('UserDetails', {
-        name: itemData.item.login,
-        avatar: itemData.item.avatar_url,
+        name: item.login,
+        avatar: item.avatar_url,
       });
     };
     return (
       <TouchableOpacity
         onPress={handleClickHandler}
       >
-        <Card>
+        {/* <Card>
           <Image
-            source={{ uri: itemData.item.avatar_url }}
+            source={{ uri: item.avatar_url }}
             style={{ height: '100%', width: '50%' }}
           />
           <View>
-            <Text style={styles.name}>{itemData.item.login.toUpperCase()}</Text>
+            <Text style={styles.name}>{item.login.toUpperCase()}</Text>
           </View>
-        </Card>
+        </Card> */}
+        <ListItem
+          title={item.login}
+          leftAvatar={{ source: { uri: item.avatar_url } }}
+          bottomDivider
+          chevron
+        />
       </TouchableOpacity>
     );
   };
@@ -85,10 +92,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 10,
-    width: '100%',
     backgroundColor: COLORS.accentColor,
   },
   spinnerTextStyle: {
@@ -97,7 +101,6 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: '600',
     color: COLORS.primaryColor,
-
   },
 });
 

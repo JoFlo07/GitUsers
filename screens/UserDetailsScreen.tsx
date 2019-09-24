@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { ListItem, Avatar } from 'react-native-elements';
 import {
   View, Text, StyleSheet, Image, FlatList,
 } from 'react-native';
 import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
-import List from '../components/List';
 import COLORS from '../constants/Colors';
 
 interface UserDetailsScreenProps {
@@ -28,17 +28,26 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
   const fetchedFollowers = useSelector((state) => state.followers.followers);
   const fetchedRepos = useSelector((state) => state.repos.repos);
 
-  const renderFollowers = (itemData) => {
+  const renderFollowers = ({ item }) => {
     return (
-      <Text>{itemData.item.login}</Text>
+      <View>
+        <ListItem
+          title={item.login}
+          leftAvatar={{ source: { uri: item.avatar_url } }}
+          bottomDivider
+        />
+      </View>
     );
   };
 
-  const renderRepos = (itemData) => {
+  const renderRepos = ({ item }) => {
     setSpinner(false);
     return (
       <View>
-        <Text>{itemData.item.name}</Text>
+        <ListItem
+          title={item.name}
+          bottomDivider
+        />
       </View>
     );
   };
@@ -51,28 +60,30 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         textStyle={styles.spinnerTextStyle}
       />
       <View style={styles.userDetailsContainer}>
-        <Image
-          source={{ uri: avatar }}
-          style={{ height: 50, width: 50 }}
+        <Avatar
+          rounded
+          source={{
+            uri:
+              avatar,
+          }}
+          size="medium"
         />
-        <Text>{username}</Text>
+        <Text style={styles.username}>{username}</Text>
       </View>
-      <List style={styles.listContainer}>
-        <Text>FOLLOWERS</Text>
-        <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={fetchedFollowers}
-          renderItem={renderFollowers}
-          style={{ width: '100%' }}
-        />
-        <Text>REPOSITORIES</Text>
-        <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={fetchedRepos}
-          renderItem={renderRepos}
-          style={{ width: '100%' }}
-        />
-      </List>
+      <Text style={styles.title}>FOLLOWERS</Text>
+      <FlatList
+        keyExtractor={(item, index) => index.toString()}
+        data={fetchedFollowers}
+        renderItem={renderFollowers}
+        style={{ width: '100%' }}
+      />
+      <Text style={styles.title}>REPOSITORIES</Text>
+      <FlatList
+        keyExtractor={(item, index) => index.toString()}
+        data={fetchedRepos}
+        renderItem={renderRepos}
+        style={{ width: '100%' }}
+      />
     </View>
   );
 };
@@ -86,16 +97,22 @@ const styles = StyleSheet.create({
   userDetailsContainer: {
     flexDirection: 'row',
     backgroundColor: COLORS.accentColor,
-    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingVertical: 10,
+    padding: 20,
     width: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF',
   },
-  listContainer: {
-
+  title: {
+    color: COLORS.primaryColor,
+    marginVertical: 20,
+    fontWeight: '600',
+  },
+  username: {
+    fontWeight: '600',
+    paddingLeft: 20,
+    fontSize: 24,
   },
 });
 

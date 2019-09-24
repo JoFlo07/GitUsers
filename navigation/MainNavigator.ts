@@ -8,8 +8,18 @@ import COLORS from '../constants/Colors';
 
 
 const MainNavigator = createStackNavigator({
-  Search: SearchScreen,
-  UserDetails: UserDetailsScreen,
+  Search: {
+    screen: SearchScreen,
+    navigationOptions: {
+      headerTitle: 'GitUsers',
+    },
+  },
+  UserDetails: {
+    screen: UserDetailsScreen,
+    navigationOptions: {
+      headerTitle: 'Details',
+    },
+  },
 },
 {
   defaultNavigationOptions: {

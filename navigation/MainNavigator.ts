@@ -4,6 +4,8 @@ import { Platform } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import UserDetailsScreen from '../screens/UserDetailsScreen';
 
+import COLORS from '../constants/Colors';
+
 
 const MainNavigator = createStackNavigator({
   Search: SearchScreen,
@@ -12,7 +14,7 @@ const MainNavigator = createStackNavigator({
 {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? 'blue' : '',
+      backgroundColor: Platform.OS === 'android' ? COLORS.primaryColor : '',
     },
   },
 });

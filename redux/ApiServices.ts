@@ -31,7 +31,6 @@ export const getUsers = (userName) => (dispatch) => {
 
 
 export const getUserFollowers = (userName) => (dispatch) => {
-  console.log(userName);
   dispatch(fetchFollowersPending());
   fetch(`${BASE_URL}users/${userName}/followers`)
     .then((res) => res.json())

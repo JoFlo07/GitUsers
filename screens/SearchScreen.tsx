@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 import {
   View, StyleSheet, Keyboard, Text, FlatList, Image, TouchableOpacity,
 } from 'react-native';
@@ -13,6 +14,7 @@ interface SearchScreenProps {
 }
 
 const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
+  const [spinner, setSpinner] = useState(false);
   const [userInput, setUserInput] = useState('');
   const dispatch = useDispatch();
 
@@ -22,6 +24,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
   };
 
   const confirmInputHandler = () => {
+    setSpinner(true);
     setUserInput('');
     Keyboard.dismiss();
     dispatch(getUsers(userInput));
@@ -32,6 +35,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 
 
   const renderUsers = (itemData) => {
+    setSpinner(false);
     const handleClickHandler = () => {
       navigation.navigate('UserDetails', {
         name: itemData.item.login,
@@ -55,6 +59,11 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
+      <Spinner
+        visible={spinner}
+        textContent="Loading..."
+        textStyle={styles.spinnerTextStyle}
+      />
       <SearchBar
         confirmInputHandler={confirmInputHandler}
         userInput={userInput}
@@ -88,6 +97,9 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 10,
     width: '100%',
+  },
+  spinnerTextStyle: {
+    color: '#FFF',
   },
 });
 

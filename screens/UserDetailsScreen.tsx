@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 import {
   View, Text, StyleSheet, Image, FlatList,
 } from 'react-native';
@@ -10,11 +11,13 @@ interface UserDetailsScreenProps {
 }
 
 const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => {
+  const [spinner, setSpinner] = useState(false);
   const username = navigation.getParam('name');
   const avatar = navigation.getParam('avatar');
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setSpinner(true);
     dispatch(getUserFollowers(username));
     dispatch(getUserRepos(username));
   }, []);
@@ -32,6 +35,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
   };
 
   const renderRepos = (itemData) => {
+    setSpinner(false);
     return (
       <View>
         <Text>{itemData.item.name}</Text>
@@ -41,6 +45,11 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
 
   return (
     <View style={styles.screen}>
+      <Spinner
+        visible={spinner}
+        textContent="Loading..."
+        textStyle={styles.spinnerTextStyle}
+      />
       <View style={styles.userDetailsContainer}>
         <Image
           source={{ uri: avatar }}
@@ -76,6 +85,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     width: '80%',
+  },
+  spinnerTextStyle: {
+    color: '#FFF',
   },
 });
 

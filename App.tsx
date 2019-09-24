@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+
 // eslint-disable-next-line import/no-unresolved
 import { useScreens } from 'react-native-screens';
 import MainNavigator from './navigation/MainNavigator';

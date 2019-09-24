@@ -49,9 +49,11 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
         <View style={styles.card}>
           <Image
             source={{ uri: itemData.item.avatar_url }}
-            style={{ height: 50, width: 50 }}
+            style={{ height: '100%', width: '50%' }}
           />
-          <Text>{itemData.item.login}</Text>
+          <View>
+            <Text style={styles.name}>{itemData.item.login.toUpperCase()}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -87,19 +89,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     width: '100%',
+    backgroundColor: COLORS.accentColor,
   },
   card: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     elevation: 5,
-    backgroundColor: COLORS.accentColor,
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: COLORS.accentColor,
     padding: 20,
     marginVertical: 10,
+    height: 150,
     width: '100%',
   },
   spinnerTextStyle: {
     color: '#FFF',
+  },
+  name: {
+    fontWeight: '600',
+    color: COLORS.primaryColor,
+
   },
 });
 

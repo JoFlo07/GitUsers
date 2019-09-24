@@ -3,6 +3,8 @@ import {
   View, TextInput, Button, StyleSheet,
 } from 'react-native';
 
+import COLORS from '../constants/Colors';
+
 interface SearchBarProps {
    confirmInputHandler: () => void;
    userInput: string,
@@ -28,6 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = (
       </View>
       <View style={styles.buttonContainer}>
         <Button
+          color={COLORS.primaryColor}
           title="SEARCH"
           onPress={confirmInputHandler}
         />

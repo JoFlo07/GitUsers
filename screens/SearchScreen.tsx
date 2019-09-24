@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  View, StyleSheet, Keyboard, Text, FlatList,
+  View, StyleSheet, Keyboard, Text, FlatList, Image, TouchableOpacity,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import getUsers from '../redux/ApiServices';
 
-const SearchScreen: React.FC = (props) => {
+import COLORS from '../constants/Colors';
+
+const SearchScreen: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const dispatch = useDispatch();
 
@@ -14,7 +16,6 @@ const SearchScreen: React.FC = (props) => {
   const userInputHandler = (inputText: string) => {
     setUserInput(inputText);
   };
-
 
   const confirmInputHandler = () => {
     setUserInput('');
@@ -27,9 +28,15 @@ const SearchScreen: React.FC = (props) => {
 
   const renderUsers = (itemData) => {
     return (
-      <View>
-        <Text>{itemData.item.login}</Text>
-      </View>
+      <TouchableOpacity>
+        <View style={styles.card}>
+          <Image
+            source={{ uri: itemData.item.avatar_url }}
+            style={{ height: 40, width: 40 }}
+          />
+          <Text>{itemData.item.login}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -40,14 +47,12 @@ const SearchScreen: React.FC = (props) => {
         userInput={userInput}
         userInputHandler={userInputHandler}
       />
-      <View>
-        <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={fetchedUsers}
-          renderItem={renderUsers}
-          style={{ width: '100%' }}
-        />
-      </View>
+      <FlatList
+        keyExtractor={(item, index) => index.toString()}
+        data={fetchedUsers}
+        renderItem={renderUsers}
+        style={{ width: '100%' }}
+      />
     </View>
   );
 };
@@ -55,9 +60,20 @@ const SearchScreen: React.FC = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 10,
+    width: '100%',
+  },
+  card: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    elevation: 5,
+    backgroundColor: COLORS.accentColor,
+    padding: 20,
+    marginVertical: 10,
+    width: '100%',
   },
 });
 

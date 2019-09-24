@@ -49,15 +49,6 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
       <TouchableOpacity
         onPress={handleClickHandler}
       >
-        {/* <Card>
-          <Image
-            source={{ uri: item.avatar_url }}
-            style={{ height: '100%', width: '50%' }}
-          />
-          <View>
-            <Text style={styles.name}>{item.login.toUpperCase()}</Text>
-          </View>
-        </Card> */}
         <ListItem
           title={item.login}
           leftAvatar={{ source: { uri: item.avatar_url } }}

@@ -3,19 +3,33 @@ import {
   View, TextInput, Button, StyleSheet,
 } from 'react-native';
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+   confirmInputHandler: () => void;
+   userInput: string,
+  userInputHandler: (inputText: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = (
+  { confirmInputHandler, userInput, userInputHandler },
+) => {
   return (
     <View style={styles.searchContainer}>
       <View style={styles.textInputContainer}>
         <TextInput
           placeholder="Type Username..."
           style={styles.input}
+          blurOnSubmit
+          autoCapitalize="none"
+          autoCorrect={false}
+          maxLength={20}
+          onChangeText={userInputHandler}
+          value={userInput}
         />
       </View>
       <View style={styles.buttonContainer}>
         <Button
           title="SEARCH"
-          onPress={() => {}}
+          onPress={confirmInputHandler}
         />
       </View>
     </View>

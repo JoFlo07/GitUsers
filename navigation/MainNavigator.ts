@@ -16,6 +16,7 @@ const MainNavigator = createStackNavigator({
     headerStyle: {
       backgroundColor: Platform.OS === 'android' ? COLORS.primaryColor : '',
     },
+    headerTintColor: Platform.OS === 'android' ? COLORS.accentColor : COLORS.primaryColor,
   },
 });
 

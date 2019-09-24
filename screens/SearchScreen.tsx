@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View, StyleSheet,
+} from 'react-native';
+import SearchBar from '../components/SearchBar';
 
 const SearchScreen: React.FC = () => {
   return (
     <View style={styles.screen}>
-      <Text>SearchScreen</Text>
+      <SearchBar />
     </View>
   );
 };
@@ -12,8 +15,9 @@ const SearchScreen: React.FC = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
 });
 

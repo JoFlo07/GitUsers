@@ -11,6 +11,7 @@ import { getUsers } from '../redux/ApiServices';
 
 import COLORS from '../constants/Colors';
 
+
 interface SearchScreenProps {
   navigation: any,
 }
@@ -26,7 +27,14 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
   };
 
   const confirmInputHandler = () => {
+    if (userInput === '') {
+      return;
+    }
     setSpinner(true);
+    // in case no users can be found stop spinner after 2s
+    setTimeout(() => {
+      setSpinner(false);
+    }, 2000);
     setUserInput('');
     Keyboard.dismiss();
     dispatch(getUsers(userInput));
@@ -35,6 +43,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 
   // get users from store
   const fetchedUsers = useSelector((state) => state.users.users);
+
 
   const renderUsers = ({ item }) => {
     setSpinner(false);

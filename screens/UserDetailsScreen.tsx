@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar, Icon } from 'react-native-elements';
 import {
   View, Text, StyleSheet, FlatList,
 } from 'react-native';
@@ -51,6 +51,18 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
     );
   };
 
+  const icon = () => {
+    return (
+      <View style={styles.iconContainer}>
+        <Icon
+          name="ios-close"
+          type="ionicon"
+          size={30}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.screen}>
       <Spinner
@@ -75,6 +87,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         data={fetchedFollowers}
         renderItem={renderFollowers}
         style={{ width: '100%', height: 200 }}
+        ListEmptyComponent={icon}
       />
       <Text style={styles.title}>REPOSITORIES</Text>
       <FlatList
@@ -82,6 +95,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         data={fetchedRepos}
         renderItem={renderRepos}
         style={{ width: '100%', height: 200 }}
+        ListEmptyComponent={icon}
       />
     </View>
   );
@@ -116,6 +130,9 @@ const styles = StyleSheet.create({
   },
   repoContainer: {
     marginTop: 40,
+  },
+  iconContainer: {
+    paddingTop: '25%',
   },
 });
 

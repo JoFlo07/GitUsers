@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem } from 'react-native-elements';
 import {
-  View, StyleSheet, Keyboard, TouchableOpacity,
+  View, StyleSheet, Keyboard, TouchableOpacity, TouchableWithoutFeedback,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import SearchResultList from '../components/SearchResultList';
@@ -66,22 +66,24 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Spinner
-        visible={spinner}
-        textContent="Loading..."
-        textStyle={styles.spinnerTextStyle}
-      />
-      <SearchBar
-        confirmInputHandler={confirmInputHandler}
-        userInput={userInput}
-        userInputHandler={userInputHandler}
-      />
-      <SearchResultList
-        renderUsers={renderUsers}
-        fetchedUsers={fetchedUsers}
-      />
-    </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
+      <View style={styles.screen}>
+        <Spinner
+          visible={spinner}
+          textContent="Loading..."
+          textStyle={styles.spinnerTextStyle}
+        />
+        <SearchBar
+          confirmInputHandler={confirmInputHandler}
+          userInput={userInput}
+          userInputHandler={userInputHandler}
+        />
+        <SearchResultList
+          renderUsers={renderUsers}
+          fetchedUsers={fetchedUsers}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

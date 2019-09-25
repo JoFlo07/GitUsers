@@ -1,21 +1,17 @@
 import React from 'react';
-import {
-  Text, View, StyleSheet,
-} from 'react-native';
+import { Provider } from 'react-redux';
+// eslint-disable-next-line import/no-unresolved
+import { useScreens } from 'react-native-screens';
+import MainNavigator from './navigation/MainNavigator';
+import store from './redux/store';
 
+useScreens();
 
 const App: React.FC = () => (
-  <View style={styles.screen}>
-    <Text>Hi</Text>
-  </View>
+  <Provider store={store}>
+    <MainNavigator />
+  </Provider>
 );
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;

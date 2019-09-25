@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { ListItem, Avatar, Icon } from 'react-native-elements';
 import {
-  View, Text, StyleSheet, FlatList,
+  View, Text, StyleSheet, FlatList, Dimensions,
 } from 'react-native';
 import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
 import COLORS from '../constants/Colors';
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.accentColor,
     alignItems: 'center',
     padding: 20,
-    width: '100%',
+    width: Dimensions.get('window').width,
   },
   spinnerTextStyle: {
     color: '#FFF',

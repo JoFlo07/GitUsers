@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TextInput, Button, StyleSheet,
+  View, TextInput, Button, StyleSheet, Dimensions,
 } from 'react-native';
 
 import COLORS from '../constants/Colors';
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: Dimensions.get('window').width,
   },
   textInputContainer: {
     width: '70%',

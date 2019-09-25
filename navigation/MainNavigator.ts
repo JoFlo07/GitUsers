@@ -28,6 +28,7 @@ const MainNavigator = createStackNavigator({
     },
     headerTintColor: Platform.OS === 'android' ? COLORS.accentColor : COLORS.primaryColor,
   },
+  headerLayoutPreset: 'center',
 });
 
 export default createAppContainer(MainNavigator);

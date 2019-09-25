@@ -35,21 +35,28 @@ interface SearchResultListProps {
 const SearchResultList: React.FC<SearchResultListProps> = ({
   fetchedUsers, renderUsers,
 }) => {
+
+  const iconContainer = (
+    <View style={styles.iconContainer}>
+      <Icon
+        name="logo-github"
+        type="ionicon"
+        size={40}
+      />
+      <Text>In Git We Trust!</Text>
+    </View>
+  );
+
   return (
     <View style={styles.listContainer}>
-      <View style={styles.iconContainer}>
-        <Icon
-          name="logo-github"
-          type="ionicon"
-          size={40}
-        />
-        <Text>In Git We Trust!</Text>
-      </View>
+      {fetchedUsers.length === 0 ? iconContainer : null}
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={fetchedUsers}
         renderItem={renderUsers}
         style={{ width: '100%' }}
+        onEndReachedThreshold={0.5}
+        initialNumToRender={5}
       />
     </View>
   );

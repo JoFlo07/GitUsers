@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import { Icon } from 'react-native-elements';
 import {
-  View, StyleSheet, FlatList, Text, Alert,
+  View, StyleSheet, FlatList, Text,
 } from 'react-native';
 
 
@@ -36,6 +37,14 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
 }) => {
   return (
     <View style={styles.listContainer}>
+      <View style={styles.iconContainer}>
+        <Icon
+          name="logo-github"
+          type="ionicon"
+          size={40}
+        />
+        <Text>In Git We Trust!</Text>
+      </View>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={fetchedUsers}
@@ -49,6 +58,11 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
+  },
+  iconContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

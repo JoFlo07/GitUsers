@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = (
   { confirmInputHandler, userInput, userInputHandler },
 ) => {
   const [searchContainerWidth, setSearchContainerWidth] = useState(Dimensions.get('window').width);
-  // adapt with in landscape mode
+  // adapt width in landscape mode
   const updateLayout = () => {
     setSearchContainerWidth(Dimensions.get('window').width);
   };

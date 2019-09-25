@@ -6,6 +6,7 @@ import {
   View, Text, StyleSheet, FlatList, Dimensions,
 } from 'react-native';
 import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
+
 import COLORS from '../constants/Colors';
 
 interface UserDetailsScreenProps {
@@ -35,17 +36,15 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
   const fetchedFollowers = useSelector((state) => state.followers.followers);
   const fetchedRepos = useSelector((state) => state.repos.repos);
 
-  const renderFollowers = ({ item }) => {
-    return (
-      <View>
-        <ListItem
-          title={item.login}
-          leftAvatar={{ source: { uri: item.avatar_url } }}
-          bottomDivider
-        />
-      </View>
-    );
-  };
+  const renderFollowers = ({ item }) => (
+    <View>
+      <ListItem
+        title={item.login}
+        leftAvatar={{ source: { uri: item.avatar_url } }}
+        bottomDivider
+      />
+    </View>
+  );
 
   const renderRepos = ({ item }) => {
     setSpinner(false);
@@ -59,17 +58,15 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
     );
   };
 
-  const icon = () => {
-    return (
-      <View style={styles.iconContainer}>
-        <Icon
-          name="ios-close"
-          type="ionicon"
-          size={30}
-        />
-      </View>
-    );
-  };
+  const icon = () => (
+    <View style={styles.iconContainer}>
+      <Icon
+        name="ios-close"
+        type="ionicon"
+        size={30}
+      />
+    </View>
+  );
 
   return (
     <View style={styles.screen}>

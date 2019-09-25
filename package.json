@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
+    "@types/react-navigation": "^3.0.8",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-elements": "^1.2.1",

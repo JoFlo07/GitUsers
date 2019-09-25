@@ -40,10 +40,8 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
     dispatch(getUsers(userInput));
   };
 
-
   // get users from store
   const fetchedUsers = useSelector((state) => state.users.users);
-
 
   const renderUsers = ({ item }) => {
     setSpinner(false);

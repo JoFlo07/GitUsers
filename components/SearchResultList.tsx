@@ -35,7 +35,6 @@ interface SearchResultListProps {
 const SearchResultList: React.FC<SearchResultListProps> = ({
   fetchedUsers, renderUsers,
 }) => {
-
   const iconContainer = (
     <View style={styles.iconContainer}>
       <Icon
@@ -51,12 +50,10 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
     <View style={styles.listContainer}>
       {fetchedUsers.length === 0 ? iconContainer : null}
       <FlatList
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(index) => index.toString()}
         data={fetchedUsers}
         renderItem={renderUsers}
         style={{ width: '100%' }}
-        onEndReachedThreshold={0.5}
-        initialNumToRender={5}
       />
     </View>
   );

@@ -13,10 +13,18 @@ interface UserDetailsScreenProps {
 }
 
 const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => {
+  const [containerWidth, setContainerWidth] = useState(Dimensions.get('window').width);
   const [spinner, setSpinner] = useState(true);
   const username = navigation.getParam('name');
   const avatar = navigation.getParam('avatar');
   const dispatch = useDispatch();
+
+  // adapt with in landscape mode
+  const updateLayout = () => {
+    setContainerWidth(Dimensions.get('window').width);
+  };
+  Dimensions.addEventListener('change', updateLayout);
+
 
   useEffect(() => {
     dispatch(getUserFollowers(username));
@@ -70,7 +78,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         textContent="Loading..."
         textStyle={styles.spinnerTextStyle}
       />
-      <View style={styles.userDetailsContainer}>
+      <View style={{ ...styles.userDetailsContainer, width: containerWidth }}>
         <Avatar
           rounded
           source={{
@@ -112,7 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.accentColor,
     alignItems: 'center',
     padding: 20,
-    width: Dimensions.get('window').width,
   },
   spinnerTextStyle: {
     color: '#FFF',

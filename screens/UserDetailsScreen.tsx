@@ -5,7 +5,7 @@ import { ListItem, Avatar, Icon } from 'react-native-elements';
 import {
   View, Text, StyleSheet, FlatList, Dimensions,
 } from 'react-native';
-import { getUserRepos, getUserFollowers } from '../redux/ApiServices';
+import { getUserRepos, getUserFollowers, getUserDetails } from '../redux/ApiServices';
 
 import COLORS from '../constants/Colors';
 
@@ -30,11 +30,13 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
   useEffect(() => {
     dispatch(getUserFollowers(username));
     dispatch(getUserRepos(username));
+    dispatch(getUserDetails(username));
   }, []);
 
   // get users from store
   const fetchedFollowers = useSelector((state) => state.followers.followers);
   const fetchedRepos = useSelector((state) => state.repos.repos);
+  const fetchedUserDetails = useSelector((state) => state.details.userdetails);
 
   const renderFollowers = ({ item }) => (
     <View>
@@ -67,7 +69,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
       />
     </View>
   );
-
+  console.log(fetchedUserDetails);
   return (
     <View style={styles.screen}>
       <Spinner

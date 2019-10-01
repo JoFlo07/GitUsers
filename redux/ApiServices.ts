@@ -8,6 +8,9 @@ import {
   fetchReposError,
   fetchReposPending,
   fetchReposSuccess,
+  fetchUserDetailsError,
+  fetchUserDetailsPending,
+  fetchUserDetailsSuccess,
 } from './actions';
 
 const BASE_URL = 'https://api.github.com/';
@@ -62,5 +65,21 @@ export const getUserRepos = (userName) => (dispatch) => {
     });
 };
 
+export const getUserDetails = (userName) => (dispatch) => {
+  dispatch(fetchUserDetailsPending());
+  fetch(`${BASE_URL}users/${userName}`)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.error) {
+        throw (res.error);
+      }
+      dispatch(fetchUserDetailsSuccess(res));
+      return res;
+    })
+    .catch((error) => {
+      dispatch(fetchUserDetailsError(error));
+    });
+};
 
-export default { getUsers, getUserFollowers, getUserRepos };
+
+export default { getUsers, getUserFollowers, getUserRepos, getUserDetails };

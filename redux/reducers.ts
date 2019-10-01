@@ -8,6 +8,9 @@ import {
   FETCH_REPOS_ERROR,
   FETCH_REPOS_PENDING,
   FETCH_REPOS_SUCCESS,
+  FETCH_USER_DETAILS_ERROR,
+  FETCH_USER_DETAILS_PENDING,
+  FETCH_USER_DETAILS_SUCCESS,
 } from './actions';
 
 const initialState = {
@@ -16,6 +19,7 @@ const initialState = {
   followers: [],
   repos: [],
   error: null,
+  userdetails: [],
 };
 
 export function usersReducer(
@@ -96,4 +100,28 @@ export function reposReducer(
   }
 }
 
-export default { usersReducer, followersReducer, reposReducer };
+export function userDetailsReducer(state = initialState, action) {
+  switch (action.type) {
+    case FETCH_USER_DETAILS_PENDING:
+      return {
+        ...state,
+        pending: true,
+      };
+    case FETCH_USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        userdetails: action.payload,
+      };
+    case FETCH_USER_DETAILS_ERROR:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+    default:
+      return state;
+  }
+}
+
+export default { usersReducer, followersReducer, reposReducer, userDetailsReducer };

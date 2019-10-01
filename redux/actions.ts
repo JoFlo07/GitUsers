@@ -7,6 +7,10 @@ export const FETCH_FOLLOWERS_ERROR = 'FETCH_FOLLOWERS_ERROR';
 export const FETCH_REPOS_PENDING = 'FETCH_REPOS_PENDING';
 export const FETCH_REPOS_SUCCESS = 'FETCH_REPOS_SUCCESS';
 export const FETCH_REPOS_ERROR = 'FETCH_REPOS_ERROR';
+export const FETCH_USER_DETAILS_PENDING = 'FETCH_USER_DETAILS_PENDING';
+export const FETCH_USER_DETAILS_SUCCESS = 'FETCH_USER_DETAILS_SUCCESS';
+export const FETCH_USER_DETAILS_ERROR = 'FETCH_USER_DETAILS_ERROR';
+
 
 // fetch user actions
 export function fetchUsersPending() {
@@ -68,6 +72,28 @@ export function fetchReposSuccess(repos) {
 export function fetchReposError(error) {
   return {
     type: FETCH_REPOS_ERROR,
+    error,
+  };
+}
+
+// fetch user details
+
+export function fetchUserDetailsPending() {
+  return {
+    type: FETCH_USER_DETAILS_PENDING,
+  };
+}
+
+export function fetchUserDetailsSuccess(userdetails) {
+  return {
+    type: FETCH_USER_DETAILS_SUCCESS,
+    payload: userdetails,
+  };
+}
+
+export function fetchUserDetailsError(error) {
+  return {
+    type: FETCH_USER_DETAILS_ERROR,
     error,
   };
 }

@@ -72,6 +72,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
           visible={spinner}
           textContent="Loading..."
           textStyle={styles.spinnerTextStyle}
+          overlayColor="rgba(0, 0, 0, 0.9)"
         />
         <SearchBar
           confirmInputHandler={confirmInputHandler}

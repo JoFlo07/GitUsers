@@ -74,13 +74,15 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
 
   const renderDetails = () => (
     Object.keys(fetchedUserDetails).map((el) => (
-      <View style={styles.detailsItem} key={uuidv4()}>
-        <Text style={{ fontWeight: '600' }}>
-          {`${el}:`}
-        </Text>
-        <Text>
-          {`${fetchedUserDetails[el]}`}
-        </Text>
+      <View>
+        <ListItem
+          key={uuidv4()}
+          title={el}
+          titleStyle={{ fontSize: 14, fontWeight: '600' }}
+          subtitle={String(fetchedUserDetails[el])}
+          subtitleStyle={{ fontSize: 12 }}
+          bottomDivider
+        />
       </View>
     ))
   );
@@ -104,7 +106,11 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         <Text style={styles.username}>{username}</Text>
       </View>
       <Text style={styles.title}>DETAILS</Text>
-      <ScrollView contentContainerStyle={styles.userDetailsContainer}>
+      <ScrollView
+        alwaysBounceHorizontal
+        horizontal
+        style={{ width: '100%' }}
+      >
         {renderDetails()}
       </ScrollView>
       <Text style={styles.title}>FOLLOWERS</Text>
@@ -129,7 +135,6 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: COLORS.accentColor,
@@ -159,18 +164,12 @@ const styles = StyleSheet.create({
   },
   repoContainer: {
     width: '100%',
-    height: 400,
   },
   followersContainer: {
     width: '100%',
-    height: 400,
   },
   userDetailsContainer: {
     width: '100%',
-    height: 400,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: '#fff',
   },
   detailsItem: {
     paddingTop: 10,

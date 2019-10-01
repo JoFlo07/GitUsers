@@ -108,6 +108,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
       </View>
       <Text style={styles.title}>DETAILS</Text>
       <ScrollView
+        nestedScrollEnabled
         style={styles.detailsContainer}
       >
         {renderDetails()}
@@ -115,6 +116,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
       <Text style={styles.title}>FOLLOWERS</Text>
       <View style={styles.followersContainer}>
         <FlatList
+          nestedScrollEnabled
           keyExtractor={(item, index) => index.toString()}
           data={fetchedFollowers}
           renderItem={renderFollowers}
@@ -124,6 +126,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
       <Text style={styles.title}>REPOSITORIES</Text>
       <View style={styles.repoContainer}>
         <FlatList
+          nestedScrollEnabled
           keyExtractor={(item, index) => index.toString()}
           data={fetchedRepos}
           renderItem={renderRepos}

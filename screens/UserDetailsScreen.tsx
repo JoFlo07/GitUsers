@@ -93,6 +93,7 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
         visible={spinner}
         textContent="Loading..."
         textStyle={styles.spinnerTextStyle}
+        overlayColor="rgba(0, 0, 0, 0.9)"
       />
       <View style={{ ...styles.userHeader, width: containerWidth }}>
         <Avatar

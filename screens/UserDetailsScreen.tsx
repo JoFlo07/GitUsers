@@ -107,28 +107,29 @@ const UserDetailsScreen: React.FC<UserDetailsScreenProps> = ({ navigation }) => 
       </View>
       <Text style={styles.title}>DETAILS</Text>
       <ScrollView
-        alwaysBounceHorizontal
-        horizontal
-        style={{ width: '100%' }}
+        style={styles.detailsContainer}
       >
         {renderDetails()}
       </ScrollView>
       <Text style={styles.title}>FOLLOWERS</Text>
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        data={fetchedFollowers}
-        renderItem={renderFollowers}
-        ListEmptyComponent={icon}
-        style={styles.followersContainer}
-      />
+      <View style={styles.followersContainer}>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={fetchedFollowers}
+          renderItem={renderFollowers}
+          ListEmptyComponent={icon}
+        />
+      </View>
       <Text style={styles.title}>REPOSITORIES</Text>
-      <FlatList
-        keyExtractor={(item, index) => index.toString()}
-        data={fetchedRepos}
-        renderItem={renderRepos}
-        style={styles.repoContainer}
-        ListEmptyComponent={icon}
-      />
+      <View style={styles.repoContainer}>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={fetchedRepos}
+          renderItem={renderRepos}
+          style={styles.repoContainer}
+          ListEmptyComponent={icon}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -163,16 +164,16 @@ const styles = StyleSheet.create({
     paddingTop: '25%',
   },
   repoContainer: {
+    height: 300,
     width: '100%',
   },
   followersContainer: {
+    height: 300,
     width: '100%',
   },
-  userDetailsContainer: {
+  detailsContainer: {
+    height: 300,
     width: '100%',
-  },
-  detailsItem: {
-    paddingTop: 10,
   },
 });
 

@@ -19,7 +19,7 @@ const initialState = {
   followers: [],
   repos: [],
   error: null,
-  userdetails: [],
+  userdetails: {},
 };
 
 export function usersReducer(
